@@ -102,9 +102,7 @@ try:
             print(f"    State: {pr['state']}, Created: {pr['created_at'][:10]}, User: {pr['user']['login']}")
             print(f"    body: {pr['body']}\n")
             # print(f"    description: {pr['description']}\n")
-            print(f"    Links: {pr['commits_url']}\n")
-            # print(f"    description: {pr['_links']['description']}\n")
-            # print(f"    review_comment: {pr['_links']['review_comment']}\n")
+            print(f"    commits_url: {pr['commits_url']}\n")
             print(f"    commits: {pr['head']['sha']}\n")
 
         if len(pull_requests) > 5:
