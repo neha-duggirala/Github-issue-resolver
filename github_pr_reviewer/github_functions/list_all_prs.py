@@ -81,20 +81,10 @@ def list_pull_requests(owner: str, repo: str, state: str = 'all', github_token: 
 
     return all_prs
 
-# --- Example Usage ---
-
-# 1. Define the repository
-# Example: The 'requests' library repository
 OWNER = "neha-duggirala"
 REPO = "Github-issue-resolver"
-
-# 2. Get your GitHub Token (Recommended for higher rate limits and private repos)
-# You can set this as an environment variable for security.
-# For public repos, you might omit the token, but you'll it rate limits sooner.
-# Ensure your token has the "Pull requests" (read) permission.
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
 
-# 3. Call the function
 try:
     # List all PRs, not just 'open' ones (using 'all' as per your documentation)
     pull_requests = list_pull_requests(OWNER, REPO, state='all', github_token=GITHUB_TOKEN) 
@@ -111,10 +101,11 @@ try:
             print(f"  PR #{pr['number']} - Title: \"{pr['title']}\"")
             print(f"    State: {pr['state']}, Created: {pr['created_at'][:10]}, User: {pr['user']['login']}")
             print(f"    body: {pr['body']}\n")
-            # print(f"    Links: {pr['_links']}\n")
+            # print(f"    description: {pr['description']}\n")
+            print(f"    Links: {pr['commits_url']}\n")
             # print(f"    description: {pr['_links']['description']}\n")
             # print(f"    review_comment: {pr['_links']['review_comment']}\n")
-            # print(f"    commits: {pr['_links']['commits']}\n")
+            print(f"    commits: {pr['head']['sha']}\n")
 
         if len(pull_requests) > 5:
             print(f"  ... and {len(pull_requests) - 5} more.")

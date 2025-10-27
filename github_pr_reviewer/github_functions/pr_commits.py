@@ -51,19 +51,10 @@ def get_commit_by_sha(owner: str, repo: str, commit_sha: str, github_token: Opti
         print(f"Network error occurred during API request: {e}")
         return None
 
-# --- Example Usage ---
 
-# 1. Define the repository
-# Example: The 'requests' library repository
 OWNER = "neha-duggirala"
 REPO = "Github-issue-resolver"
-
-# 2. Get your GitHub Token (Recommended for higher rate limits and private repos)
-# You can set this as an environment variable for security.
-# For public repos, you might omit the token, but you'll it rate limits sooner.
-# Ensure your token has the "Pull requests" (read) permission.
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
-# Example SHA from the Requests library: a commit for an enhancement
 COMMIT_SHA = "dd46be1685b38f9ffc9411d8158d416a883b39e0" 
 
 
