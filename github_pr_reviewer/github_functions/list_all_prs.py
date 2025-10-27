@@ -92,7 +92,7 @@ REPO = "Github-issue-resolver"
 # You can set this as an environment variable for security.
 # For public repos, you might omit the token, but you'll it rate limits sooner.
 # Ensure your token has the "Pull requests" (read) permission.
-GITHUB_TOKEN = os.getenv("GITHUB_TOKEN") h
+GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
 
 # 3. Call the function
 try:
@@ -102,6 +102,7 @@ try:
     if pull_requests is not None:
         print("\n--- Summary of Fetched Pull Requests ---")
         print(f"Total PRs found: {len(pull_requests)}")
+        # print(pull_requests)
         
         # Display key information for the first few PRs
         display_limit = min(5, len(pull_requests))
@@ -109,6 +110,11 @@ try:
             pr = pull_requests[i]
             print(f"  PR #{pr['number']} - Title: \"{pr['title']}\"")
             print(f"    State: {pr['state']}, Created: {pr['created_at'][:10]}, User: {pr['user']['login']}")
+            print(f"    body: {pr['body']}\n")
+            # print(f"    Links: {pr['_links']}\n")
+            # print(f"    description: {pr['_links']['description']}\n")
+            # print(f"    review_comment: {pr['_links']['review_comment']}\n")
+            # print(f"    commits: {pr['_links']['commits']}\n")
 
         if len(pull_requests) > 5:
             print(f"  ... and {len(pull_requests) - 5} more.")
