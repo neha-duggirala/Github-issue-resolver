@@ -2,8 +2,11 @@
 import json
 from typing import Any, Dict, Optional
 import requests
+from google.genai import types
+from dotenv import load_dotenv
 
-
+load_dotenv()
+github_token = os.getenv("GITHUB_TOKEN")
 
 def _github_api_post_request(url: str, data: Dict[str, Any], github_token: Optional[str] = None) -> Optional[Dict[str, Any]]:
     """
@@ -34,8 +37,7 @@ def create_pr_review_comment(
     owner: str, 
     repo: str, 
     pull_number: int, 
-    body: str, 
-    github_token: Optional[str] = None
+    body: str
 ) -> Optional[Dict[str, Any]]:
     """
     Creates a new PR review comment on a specific line of the diff using the GitHub API (POST method).
@@ -70,6 +72,35 @@ def create_pr_review_comment(
     
     return new_comment
 
+
+schema_add_pr_comment = types.FunctionDeclaration(
+    name="create_pr_review_comment",
+    description="Creates a new comment on a specific Pull Request using the GitHub API.",
+    parameters=types.Schema(
+        type=types.Type.OBJECT,
+        properties={
+            "owner": types.Schema(
+                type=types.Type.STRING,
+                description="The repository owner.",
+            ),
+            "repo": types.Schema(
+                type=types.Type.STRING,
+                description="The repository name.",
+            ),
+            "pull_number": types.Schema(
+                type=types.Type.INTEGER,
+                description="The number that identifies the pull request.",
+            ),
+            "body": types.Schema(
+                type=types.Type.STRING,
+                description="The text content for the new comment.",
+            ),
+        },
+    ),
+)
+
+
+
 if __name__ == "__main__":
     
     PR_URL = "https://github.com/neha-duggirala/Github-issue-resolver/pull/1"
@@ -88,5 +119,5 @@ if __name__ == "__main__":
 *   **Clarify README Origin**: If the README was manually created as the *initial* version, a commit message like "feat: Add initial README" might be more descriptive. If it truly was auto-generated, no change is needed, but it's good to confirm.        
 *   **Specify OS Context**: The `commands.txt` uses `.ps1` and `.bat` files, indicating Windows-specific commands. It would be helpful to explicitly state this or provide alternatives for other operating systems (e.g., Linux/macOS using `source .venv/bin/activate`).
 '''
-    updated_comment_response = create_pr_review_comment(OWNER, REPO, PULL_NUMBER, NEW_COMMENT_BODY, GITHUB_TOKEN)
+    updated_comment_response = create_pr_review_comment(OWNER, REPO, PULL_NUMBER, NEW_COMMENT_BODY)
     
