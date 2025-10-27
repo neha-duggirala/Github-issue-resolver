@@ -1,9 +1,6 @@
 import os
 from urllib.parse import urlparse
 from google.genai import types
-from dotenv import load_dotenv
-
-load_dotenv()
 
 
 def get_pr_info_from_url(pr_url):
