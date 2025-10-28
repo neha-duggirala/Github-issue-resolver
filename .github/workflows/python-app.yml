@@ -27,7 +27,14 @@ jobs:
 
       - name: Run Reviewer Agent script
         run: |
-          uv run github_pr_reviewer/main.py 'Can you add a review this PR: https://github.com/neha-duggirala/Github-issue-resolver/pull/4' --verbose
+          # Use PR URL from the pull_request event
+          PR_URL="${{ github.event.pull_request.html_url }}"
+          if [ -z "$PR_URL" ]; then
+            echo "No pull_request context (manual run). Please provide a PR or trigger from a PR event."
+            exit 1
+          fi
+          echo "Running reviewer for: $PR_URL"
+          uv run github_pr_reviewer/main.py "Can you add a review this PR: $PR_URL" --verbose
         env:
           MODEL: ${{ secrets.MODEL }}
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
