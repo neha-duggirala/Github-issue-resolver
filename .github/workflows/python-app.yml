@@ -24,7 +24,7 @@ jobs:
         run: uv sync --frozen
 
       - name: Run bin.py
-        run: uv run github_pr_reviewer/main.py "Can you please review this PR: https://github.com/neha-duggirala/Github-issue-resolver/pull/4 and add a review comment?" --verbose
+        run: uv run github_pr_reviewer/main.py 'Can you please review this PR: https://github.com/neha-duggirala/Github-issue-resolver/pull/4 and add a review comment?' --verbose
         env:
           MODEL: ${{ secrets.MODEL }}
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
