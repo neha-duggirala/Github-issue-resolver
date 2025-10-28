@@ -1,4 +1,4 @@
-name: Run Bin Script
+name: Python CI with uv
 
 on:
   workflow_dispatch:
@@ -17,11 +17,14 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: use secrets
-        run: echo "MODEL=${{ secrets.MODEL }}" >> $GITHUB_ENV
-        
+      - name: Install uv
+        run: pip install uv
+
+      - name: Create venv and install dependencies
+        run: uv sync --frozen
 
       - name: Run bin.py
         run: python github_pr_reviewer/bin.py
         env:
           MODEL: ${{ secrets.MODEL }}
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
