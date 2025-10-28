@@ -29,4 +29,4 @@ jobs:
         env:
           MODEL: ${{ secrets.MODEL }}
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
-          GITHUB_TOKEN: ${{ secrets.pr-review-pat }}
+          GITHUB_TOKEN: ${{ secrets.PR_REVIEWER_GITHUB_TOKEN }}
