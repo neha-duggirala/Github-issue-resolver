@@ -24,7 +24,7 @@ jobs:
         run: uv sync --frozen
 
       - name: Run bin.py
-        run: python github_pr_reviewer/bin.py
+        run: uv run github_pr_reviewer/bin.py
         env:
           MODEL: ${{ secrets.MODEL }}
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
