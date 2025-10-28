@@ -1,8 +1,5 @@
 import requests
 import os
-from dotenv import load_dotenv
-
-load_dotenv()
 
 def list_pull_requests(owner: str, repo: str, state: str = 'all', github_token: str = None):
     """
@@ -83,7 +80,7 @@ def list_pull_requests(owner: str, repo: str, state: str = 'all', github_token: 
 
 OWNER = "neha-duggirala"
 REPO = "Github-issue-resolver"
-GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
+GITHUB_TOKEN = os.environ["GITHUB_TOKEN"]
 
 try:
     # List all PRs, not just 'open' ones (using 'all' as per your documentation)

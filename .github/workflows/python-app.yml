@@ -24,7 +24,8 @@ jobs:
         run: uv sync --frozen
 
       - name: Run bin.py
-        run: uv run github_pr_reviewer/bin.py
+        run: uv run github_pr_reviewer/github_functions/list_all_prs.py
         env:
           MODEL: ${{ secrets.MODEL }}
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.pr-review-pat }}
