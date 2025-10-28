@@ -2,7 +2,6 @@
 import json
 from typing import Any, Dict, Optional
 import requests
-import os
 from google.genai import types
 from dotenv import load_dotenv
 
