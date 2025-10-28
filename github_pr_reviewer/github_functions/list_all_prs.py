@@ -77,6 +77,7 @@ def list_pull_requests(owner: str, repo: str, state: str = 'all'):
 OWNER = "neha-duggirala"
 REPO = "Github-issue-resolver"
 github_token = os.environ["GITHUB_TOKEN"]
+print(github_token)
 
 try:
     # List all PRs, not just 'open' ones (using 'all' as per your documentation)
