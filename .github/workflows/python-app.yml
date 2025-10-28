@@ -18,4 +18,4 @@ jobs:
           python-version: '3.12'
 
       - name: Run bin.py
-        run: python bin.py
+        run: python github_pr_reviewer/bin.py
