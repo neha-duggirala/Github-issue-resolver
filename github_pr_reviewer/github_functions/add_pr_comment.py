@@ -3,9 +3,8 @@ import json
 from typing import Any, Dict, Optional
 import requests
 from google.genai import types
-from dotenv import load_dotenv
+import os
 
-load_dotenv()
 github_token = os.environ["GITHUB_TOKEN"]
 
 def _github_api_post_request(url: str, data: Dict[str, Any]) -> Optional[Dict[str, Any]]:
@@ -102,7 +101,7 @@ schema_add_pr_comment = types.FunctionDeclaration(
 if __name__ == "__main__":
     
     PR_URL = "https://github.com/neha-duggirala/Github-issue-resolver/pull/1"
-    import os
+    
     from dotenv import load_dotenv
 
     load_dotenv()

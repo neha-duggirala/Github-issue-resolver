@@ -1,4 +1,3 @@
-import os
 from urllib.parse import urlparse
 from google.genai import types
 
