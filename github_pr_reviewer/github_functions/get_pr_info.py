@@ -1,19 +1,17 @@
-import os
 from urllib.parse import urlparse
 from google.genai import types
 
 
 def get_pr_info_from_url(pr_url):
     """
-    Parses a GitHub Pull Request URL to extract OWNER, REPO, and PULL_NUMBER,
-    and retrieves the GITHUB_TOKEN from the environment.
+    Parses a GitHub Pull Request URL to extract OWNER, REPO, and PULL_NUMBER
 
     Args:
         pr_url (str): The full URL of the GitHub Pull Request.
 
     Returns:
         Dict[str, Any]: A dictionary containing OWNER (str), REPO (str),
-                        PULL_NUMBER (int), and GITHUB_TOKEN (str | None).
+                        PULL_NUMBER (int
     """
     # Use a default URL for demonstration if parsing fails
     DEFAULT_OWNER = "neha-duggirala"
