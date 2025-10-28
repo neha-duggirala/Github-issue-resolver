@@ -1,4 +1,4 @@
-name: Python CI with uv
+name: Run PR Rviewer
 
 on:
   workflow_dispatch:
@@ -23,9 +23,9 @@ jobs:
       - name: Create venv and install dependencies
         run: uv sync --frozen
 
-      - name: Run bin.py
+      - name: Run Reviewer Agent script
         run: |
-          uv run github_pr_reviewer/main.py 'Can you please review this PR: https://github.com/neha-duggirala/Github-issue-resolver/pull/4 and add a review comment?' --verbose
+          uv run github_pr_reviewer/main.py 'Can you add a review this PR: https://github.com/neha-duggirala/Github-issue-resolver/pull/4' --verbose
         env:
           MODEL: ${{ secrets.MODEL }}
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
