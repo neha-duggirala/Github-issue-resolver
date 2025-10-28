@@ -3,12 +3,11 @@ import json
 from typing import Any, Dict, Optional
 import requests
 from google.genai import types
-from dotenv import load_dotenv
+import os
 
-load_dotenv()
-github_token = os.getenv("GITHUB_TOKEN")
+github_token = os.environ["GITHUB_TOKEN"]
 
-def _github_api_post_request(url: str, data: Dict[str, Any], github_token: Optional[str] = None) -> Optional[Dict[str, Any]]:
+def _github_api_post_request(url: str, data: Dict[str, Any]) -> Optional[Dict[str, Any]]:
     """
     Helper function to make a POST request to the GitHub API (e.g., for creation).
     """
@@ -47,8 +46,6 @@ def create_pr_review_comment(
         repo (str): The repository name.
         pull_number (int): The number that identifies the pull request.
         body (str): The text content for the new comment.
-       
-        github_token (Optional[str]): GitHub Personal Access Token with 'pull requests' write permission.
         
     Returns:
         Optional[Dict[str, Any]]: The created comment object (dictionary), or None on error.
@@ -65,7 +62,7 @@ def create_pr_review_comment(
 
     print(f"Attempting to create a review comment on PR #{pull_number} in {owner}/{repo}...")
     
-    new_comment = _github_api_post_request(api_url, data, github_token)
+    new_comment = _github_api_post_request(api_url, data)
     
     if new_comment:
         print(f"SUCCESS: New comment created with ID {new_comment.get('id')}.")
@@ -104,13 +101,13 @@ schema_add_pr_comment = types.FunctionDeclaration(
 if __name__ == "__main__":
     
     PR_URL = "https://github.com/neha-duggirala/Github-issue-resolver/pull/1"
-    import os
+    
     from dotenv import load_dotenv
 
     load_dotenv()
     OWNER = "neha-duggirala"
     REPO = "Github-issue-resolver"
-    GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
+    github_token = os.environ["GITHUB_TOKEN"]
     PULL_NUMBER = 1
     NEW_COMMENT_BODY = '''
 *   **Integrate Setup Commands**: Consider moving the commands from `commands.txt` into the `readme.md` under a new section like "Development Setup" or "Installation". This keeps all essential project information consolidated. If the project grows, a `CONTRIBUTING.md` could be a good home for more detailed developer instructions.

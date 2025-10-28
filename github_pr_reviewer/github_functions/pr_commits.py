@@ -5,8 +5,7 @@ from google.genai import types
 load_dotenv()
 from typing import List, Dict, Any, Optional
 
-github_token = os.getenv("GITHUB_TOKEN")
-
+github_token = os.environ["GITHUB_TOKEN"]
 
 def _github_api_request(
     url: str, params: Optional[Dict[str, Any]] = None
@@ -81,7 +80,6 @@ def list_pr_commits(
         owner (str): The repository owner.
         repo (str): The repository name.
         pull_number (int): The number that identifies the pull request.
-        github_token (Optional[str]): GitHub Personal Access Token for authentication.
 
     Returns:
         Optional[List[Dict[str, Any]]]: A list of commit objects (dictionaries),
@@ -142,7 +140,6 @@ def get_pr_commit_details(owner: str, repo: str, pull_number: int) -> str:
         owner (str): The repository owner.
         repo (str): The repository name.
         pull_number (int): The number that identifies the pull request.
-        github_token (Optional[str]): GitHub Personal Access Token for authentication.
 
     Returns:
         str: A multi-line string containing the formatted commit details.
