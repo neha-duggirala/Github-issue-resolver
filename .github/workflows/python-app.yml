@@ -17,5 +17,11 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: use secrets
+        run: echo "MODEL=${{ secrets.MODEL }}" >> $GITHUB_ENV
+        
+
       - name: Run bin.py
         run: python github_pr_reviewer/bin.py
+        env:
+          MODEL: ${{ secrets.MODEL }}
