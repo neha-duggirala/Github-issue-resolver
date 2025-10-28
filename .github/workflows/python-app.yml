@@ -34,7 +34,7 @@ jobs:
             exit 1
           fi
           echo "Running reviewer for: $PR_URL"
-          uv run github_pr_reviewer/main.py "Can you add a review this PR: $PR_URL" --verbose
+          uv run github_pr_reviewer/main.py "Can you add a review comment to this PR: $PR_URL" --verbose
         env:
           MODEL: ${{ secrets.MODEL }}
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
