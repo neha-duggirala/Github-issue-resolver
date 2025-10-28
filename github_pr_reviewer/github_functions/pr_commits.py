@@ -1,12 +1,11 @@
+import os
 import requests
 from dotenv import load_dotenv
 from google.genai import types
 load_dotenv()
 from typing import List, Dict, Any, Optional
-from config import *
 
-github_token = os.getenv("GITHUB_TOKEN")
-
+github_token = os.environ["GITHUB_TOKEN"]
 
 def _github_api_request(
     url: str, params: Optional[Dict[str, Any]] = None
@@ -81,7 +80,6 @@ def list_pr_commits(
         owner (str): The repository owner.
         repo (str): The repository name.
         pull_number (int): The number that identifies the pull request.
-        github_token (Optional[str]): GitHub Personal Access Token for authentication.
 
     Returns:
         Optional[List[Dict[str, Any]]]: A list of commit objects (dictionaries),
@@ -95,7 +93,7 @@ def list_pr_commits(
     print(f"Fetching commits for PR #{pull_number} in {owner}/{repo}...")
 
     # Call the helper function to fetch all pages of commits
-    commits = _github_api_request(api_url, params=params, github_token=github_token)
+    commits = _github_api_request(api_url, params=params)
 
     return commits
 
@@ -142,7 +140,6 @@ def get_pr_commit_details(owner: str, repo: str, pull_number: int) -> str:
         owner (str): The repository owner.
         repo (str): The repository name.
         pull_number (int): The number that identifies the pull request.
-        github_token (Optional[str]): GitHub Personal Access Token for authentication.
 
     Returns:
         str: A multi-line string containing the formatted commit details.
@@ -150,7 +147,7 @@ def get_pr_commit_details(owner: str, repo: str, pull_number: int) -> str:
     output = []
 
     # 1. Get the list of commits (summary info)
-    pr_commits = list_pr_commits(owner, repo, pull_number, github_token)
+    pr_commits = list_pr_commits(owner, repo, pull_number)
 
     if pr_commits:
         output.append(f"\n--- Found {len(pr_commits)} Commits in PR #{pull_number} ---")
@@ -171,7 +168,7 @@ def get_pr_commit_details(owner: str, repo: str, pull_number: int) -> str:
             )
 
             # Fetch full commit details for diff stats
-            commit_details = get_commit_by_sha(owner, repo, sha, github_token)
+            commit_details = get_commit_by_sha(owner, repo, sha)
 
             if commit_details:
                 output.append(f"  --- Detailed Stats for Commit ({short_sha}) ---")
@@ -192,10 +189,10 @@ def get_pr_commit_details(owner: str, repo: str, pull_number: int) -> str:
                 )
 
                 # 4. Print Additions (++) and Deletions (--)
-                output.append("\n  --- Difference Statistics (Diff Stats) ---")
-                output.append(f"  Total Changes: {stats_data.get('total', 0)}")
-                output.append(f"  Additions (++): {stats_data.get('additions', 0)}")
-                output.append(f"  Deletions (--): {stats_data.get('deletions', 0)}")
+                # output.append("\n  --- Difference Statistics (Diff Stats) ---")
+                # output.append(f"  Total Changes: {stats_data.get('total', 0)}")
+                # output.append(f"  Additions (++): {stats_data.get('additions', 0)}")
+                # output.append(f"  Deletions (--): {stats_data.get('deletions', 0)}")
 
                 # 5. Print Files Changed
                 output.append("\n  --- Files Modified ---")

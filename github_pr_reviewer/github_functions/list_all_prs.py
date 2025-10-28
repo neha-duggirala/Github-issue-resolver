@@ -1,10 +1,7 @@
 import requests
 import os
-from dotenv import load_dotenv
 
-load_dotenv()
-
-def list_pull_requests(owner: str, repo: str, state: str = 'all', github_token: str = None):
+def list_pull_requests(owner: str, repo: str, state: str = 'all'):
     """
     Lists all Pull Requests in a specified GitHub repository.
 
@@ -12,8 +9,6 @@ def list_pull_requests(owner: str, repo: str, state: str = 'all', github_token: 
         owner (str): The account owner of the repository (e.g., 'octocat').
         repo (str): The name of the repository (e.g., 'Spoon-Knife').
         state (str, optional): Filter by PR state. Can be 'open', 'closed', or 'all'. Defaults to 'all'.
-        github_token (str, optional): Your GitHub Personal Access Token for authentication
-                                      and higher rate limits. Defaults to None.
     
     Returns:
         list: A list of dictionaries, where each dictionary represents a Pull Request,
@@ -38,8 +33,6 @@ def list_pull_requests(owner: str, repo: str, state: str = 'all', github_token: 
     # Add Authorization header if a token is provided
     if github_token:
         headers["Authorization"] = f"Bearer {github_token}"
-    
-    print(github_token)
 
     all_prs = []
     
@@ -83,11 +76,11 @@ def list_pull_requests(owner: str, repo: str, state: str = 'all', github_token: 
 
 OWNER = "neha-duggirala"
 REPO = "Github-issue-resolver"
-GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
+github_token = os.environ["GITHUB_TOKEN"]
 
 try:
     # List all PRs, not just 'open' ones (using 'all' as per your documentation)
-    pull_requests = list_pull_requests(OWNER, REPO, state='all', github_token=GITHUB_TOKEN) 
+    pull_requests = list_pull_requests(OWNER, REPO, state='all') 
 
     if pull_requests is not None:
         print("\n--- Summary of Fetched Pull Requests ---")

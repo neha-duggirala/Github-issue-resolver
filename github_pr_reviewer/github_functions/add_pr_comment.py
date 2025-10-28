@@ -2,10 +2,12 @@
 import json
 from typing import Any, Dict, Optional
 import requests
+from google.genai import types
+import os
 
+github_token = os.environ["GITHUB_TOKEN"]
 
-
-def _github_api_post_request(url: str, data: Dict[str, Any], github_token: Optional[str] = None) -> Optional[Dict[str, Any]]:
+def _github_api_post_request(url: str, data: Dict[str, Any]) -> Optional[Dict[str, Any]]:
     """
     Helper function to make a POST request to the GitHub API (e.g., for creation).
     """
@@ -34,8 +36,7 @@ def create_pr_review_comment(
     owner: str, 
     repo: str, 
     pull_number: int, 
-    body: str, 
-    github_token: Optional[str] = None
+    body: str
 ) -> Optional[Dict[str, Any]]:
     """
     Creates a new PR review comment on a specific line of the diff using the GitHub API (POST method).
@@ -45,8 +46,6 @@ def create_pr_review_comment(
         repo (str): The repository name.
         pull_number (int): The number that identifies the pull request.
         body (str): The text content for the new comment.
-       
-        github_token (Optional[str]): GitHub Personal Access Token with 'pull requests' write permission.
         
     Returns:
         Optional[Dict[str, Any]]: The created comment object (dictionary), or None on error.
@@ -63,23 +62,52 @@ def create_pr_review_comment(
 
     print(f"Attempting to create a review comment on PR #{pull_number} in {owner}/{repo}...")
     
-    new_comment = _github_api_post_request(api_url, data, github_token)
+    new_comment = _github_api_post_request(api_url, data)
     
     if new_comment:
         print(f"SUCCESS: New comment created with ID {new_comment.get('id')}.")
     
     return new_comment
 
+
+schema_add_pr_comment = types.FunctionDeclaration(
+    name="create_pr_review_comment",
+    description="Creates a new comment on a specific Pull Request using the GitHub API.",
+    parameters=types.Schema(
+        type=types.Type.OBJECT,
+        properties={
+            "owner": types.Schema(
+                type=types.Type.STRING,
+                description="The repository owner.",
+            ),
+            "repo": types.Schema(
+                type=types.Type.STRING,
+                description="The repository name.",
+            ),
+            "pull_number": types.Schema(
+                type=types.Type.INTEGER,
+                description="The number that identifies the pull request.",
+            ),
+            "body": types.Schema(
+                type=types.Type.STRING,
+                description="The text content for the new comment.",
+            ),
+        },
+    ),
+)
+
+
+
 if __name__ == "__main__":
     
     PR_URL = "https://github.com/neha-duggirala/Github-issue-resolver/pull/1"
-    import os
+    
     from dotenv import load_dotenv
 
     load_dotenv()
     OWNER = "neha-duggirala"
     REPO = "Github-issue-resolver"
-    GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
+    github_token = os.environ["GITHUB_TOKEN"]
     PULL_NUMBER = 1
     NEW_COMMENT_BODY = '''
 *   **Integrate Setup Commands**: Consider moving the commands from `commands.txt` into the `readme.md` under a new section like "Development Setup" or "Installation". This keeps all essential project information consolidated. If the project grows, a `CONTRIBUTING.md` could be a good home for more detailed developer instructions.
@@ -88,5 +116,5 @@ if __name__ == "__main__":
 *   **Clarify README Origin**: If the README was manually created as the *initial* version, a commit message like "feat: Add initial README" might be more descriptive. If it truly was auto-generated, no change is needed, but it's good to confirm.        
 *   **Specify OS Context**: The `commands.txt` uses `.ps1` and `.bat` files, indicating Windows-specific commands. It would be helpful to explicitly state this or provide alternatives for other operating systems (e.g., Linux/macOS using `source .venv/bin/activate`).
 '''
-    updated_comment_response = create_pr_review_comment(OWNER, REPO, PULL_NUMBER, NEW_COMMENT_BODY, GITHUB_TOKEN)
+    updated_comment_response = create_pr_review_comment(OWNER, REPO, PULL_NUMBER, NEW_COMMENT_BODY)
     

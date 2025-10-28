@@ -1,8 +1,10 @@
-name: Run Bin Script
+name: Run PR Rviewer
 
 on:
   workflow_dispatch:
-    branches: [ "github-action" ]
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
   run-bin:
@@ -17,10 +19,23 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+      - name: Install uv
+        run: pip install uv
 
-      - name: Run bin.py
-        run: python bin.py
+      - name: Create venv and install dependencies
+        run: uv sync --frozen
+
+      - name: Run Reviewer Agent script
+        run: |
+          # Use PR URL from the pull_request event
+          PR_URL="${{ github.event.pull_request.html_url }}"
+          if [ -z "$PR_URL" ]; then
+            echo "No pull_request context (manual run). Please provide a PR or trigger from a PR event."
+            exit 1
+          fi
+          echo "Running reviewer for: $PR_URL"
+          uv run github_pr_reviewer/main.py "Can you add a review comment to this PR: $PR_URL" --verbose
+        env:
+          MODEL: ${{ secrets.MODEL }}
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.PR_REVIEWER_GITHUB_TOKEN }}
