@@ -25,7 +25,7 @@ jobs:
 
       - name: Run bin.py
         run: |
-          uv run github_pr_reviewer/main.py 'Can you please review this PR: https://github.com/neha-duggirala/Github-issue-resolver/pull/4 and add a review comment?' --verbose
+          uv run github_pr_reviewer/github_functions/list_all_prs.py
         env:
           MODEL: ${{ secrets.MODEL }}
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
