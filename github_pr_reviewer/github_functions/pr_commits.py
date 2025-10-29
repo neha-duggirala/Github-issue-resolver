@@ -163,9 +163,9 @@ def get_pr_commit_details(owner: str, repo: str, pull_number: int) -> str:
                 commit.get("commit", {}).get("author", {}).get("name", "Unknown")
             )
 
-            output.append(
-                f'\n{i+1}. SHA: {short_sha} | Author: {author_name} | Message: "{message_summary}"'
-            )
+            # output.append(
+            #     f'\n{i+1}. SHA: {short_sha} | Author: {author_name} | Message: "{message_summary}"'
+            # )
 
             # Fetch full commit details for diff stats
             commit_details = get_commit_by_sha(owner, repo, sha)
@@ -184,9 +184,9 @@ def get_pr_commit_details(owner: str, repo: str, pull_number: int) -> str:
                 output.append(
                     f"  Author: {commit_data.get('author', {}).get('name', 'N/A')}"
                 )
-                output.append(
-                    f"  Date: {commit_data.get('author', {}).get('date', 'N/A')[:10]}"
-                )
+                # output.append(
+                    # f"  Date: {commit_data.get('author', {}).get('date', 'N/A')[:10]}"
+                # )
 
                 # 4. Print Additions (++) and Deletions (--)
                 # output.append("\n  --- Difference Statistics (Diff Stats) ---")
@@ -204,7 +204,7 @@ def get_pr_commit_details(owner: str, repo: str, pull_number: int) -> str:
                     # Append patch content (truncated for brevity)
                     patch = file.get("patch", "No patch provided.")
                     # Truncate to a reasonable length for the output string
-                    output.append(f"    Patch (snippet): \n    {patch[:200]}...")
+                    output.append(f"    Patch (snippet): \n    {patch}...")
             else:
                 output.append(
                     f"  [ERROR] Could not fetch detailed stats for commit {short_sha}. Skipping details."
@@ -247,6 +247,7 @@ if __name__ == "__main__":
     print("=" * 50)
 
     # Use the new function to capture the output
+    
     detailed_commit_report = get_pr_commit_details(OWNER, REPO, PULL_NUMBER)
 
     # Print the resulting string only once
