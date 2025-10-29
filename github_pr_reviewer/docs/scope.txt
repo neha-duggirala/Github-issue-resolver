@@ -1,0 +1,50 @@
+Scope of V1
+this agent should help the developer to get early feedback and so that she can work on the feedback.
+this agent should help the review to reduce their time to review the PR.
+
+V1 suggestions
+1. Give a score to the PR(verdict saying can be approved, best approval or a few categories) and if the thresould doesnt match, dont tick the check(block the merge)
+1a. based on the verdict - the reviewer doesnt have to spend more time reviewing the code or has to spend a lot of time
+1b. give an estimated ETA for the review - Ajju says no
+1c. block the merge?
+
+2. Always make sure to add a Code reviewer(Not fully autonomous)
+
+3. Give a decision making capability to the Agent
+3a. If everything is fine, then go to the code reviewer.
+3b. If not, ask for rework by giving the feedback.
+
+4. what should the agent do? Rules? (ask ajju)
+5. is this agent to support the reviewer or the developer? (comments to both seperately)
+6. Why do we even need commits info? is it neccessary? is it better to take only files changed?
+7. Add logs
+8. github apps
+
+
+
+V1:
+1. Add new features - Give overall verdict (categories)
+2. Allow other users to use github agent(github apps)
+
+Rules:
+privacy violations
+owasp
+syntax errors
+memory leaks
+code formatting - sonar api(tool)
+user wants to see?
+categiry of issues and where are they from? its related files
+category ki ratings ivvachu
+- password vilation(critical, high, medium, low - color coded emojis)
+- score code coverage for unit tests 
+possible fix(like a stackover flow links) - tool
+
+
+V2:
+
+
+
+V3:
+1. track the violations along with commit changes(Ajju idea)
+2. Add line wise comment if neccessary.
+3. In depth analysis like PDF 
