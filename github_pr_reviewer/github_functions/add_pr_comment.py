@@ -98,23 +98,23 @@ schema_add_pr_comment = types.FunctionDeclaration(
 
 
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
     
-    PR_URL = "https://github.com/neha-duggirala/Github-issue-resolver/pull/1"
+#     PR_URL = "https://github.com/neha-duggirala/Github-issue-resolver/pull/1"
     
-    from dotenv import load_dotenv
+#     from dotenv import load_dotenv
 
-    load_dotenv()
-    OWNER = "neha-duggirala"
-    REPO = "Github-issue-resolver"
-    github_token = os.environ["GITHUB_TOKEN"]
-    PULL_NUMBER = 1
-    NEW_COMMENT_BODY = '''
-*   **Integrate Setup Commands**: Consider moving the commands from `commands.txt` into the `readme.md` under a new section like "Development Setup" or "Installation". This keeps all essential project information consolidated. If the project grows, a `CONTRIBUTING.md` could be a good home for more detailed developer instructions.
-*   **Correct Typos and Paths**: Please correct the typo and path in `commands.txt` from `.venv\Scripts ctivate.bat` to `.venv\Scripts\Activate.bat`.
-*   **Add Trailing Newline**: Ensure `commands.txt` (if it remains) has a trailing newline.
-*   **Clarify README Origin**: If the README was manually created as the *initial* version, a commit message like "feat: Add initial README" might be more descriptive. If it truly was auto-generated, no change is needed, but it's good to confirm.        
-*   **Specify OS Context**: The `commands.txt` uses `.ps1` and `.bat` files, indicating Windows-specific commands. It would be helpful to explicitly state this or provide alternatives for other operating systems (e.g., Linux/macOS using `source .venv/bin/activate`).
-'''
-    updated_comment_response = create_pr_review_comment(OWNER, REPO, PULL_NUMBER, NEW_COMMENT_BODY)
+#     load_dotenv()
+#     OWNER = "neha-duggirala"
+#     REPO = "Github-issue-resolver"
+#     github_token = os.environ["GITHUB_TOKEN"]
+#     PULL_NUMBER = 1
+#     NEW_COMMENT_BODY = '''
+# *   **Integrate Setup Commands**: Consider moving the commands from `commands.txt` into the `readme.md` under a new section like "Development Setup" or "Installation". This keeps all essential project information consolidated. If the project grows, a `CONTRIBUTING.md` could be a good home for more detailed developer instructions.
+# *   **Correct Typos and Paths**: Please correct the typo and path in `commands.txt` from `.venv\Scripts ctivate.bat` to `.venv\Scripts\Activate.bat`.
+# *   **Add Trailing Newline**: Ensure `commands.txt` (if it remains) has a trailing newline.
+# *   **Clarify README Origin**: If the README was manually created as the *initial* version, a commit message like "feat: Add initial README" might be more descriptive. If it truly was auto-generated, no change is needed, but it's good to confirm.        
+# *   **Specify OS Context**: The `commands.txt` uses `.ps1` and `.bat` files, indicating Windows-specific commands. It would be helpful to explicitly state this or provide alternatives for other operating systems (e.g., Linux/macOS using `source .venv/bin/activate`).
+# '''
+#     updated_comment_response = create_pr_review_comment(OWNER, REPO, PULL_NUMBER, NEW_COMMENT_BODY)
     
