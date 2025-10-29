@@ -76,7 +76,7 @@ def list_pr_file_changes(
 
     return all_file_changes
 
-def get_pr_file_changes(OWNER, REPO, PULL_NUMBER) -> List[Dict[str, Any]]:
+def get_pr_file_changes(owner, repo, pull_number) -> List[Dict[str, Any]]:
     """
     Extracts and returns the list of file changes with their patches from the provided changes data.
 
@@ -84,7 +84,7 @@ def get_pr_file_changes(OWNER, REPO, PULL_NUMBER) -> List[Dict[str, Any]]:
         changes (List[Dict[str, Any]]): The list of file changes data.
         
     """
-    changes = list_pr_file_changes(OWNER, REPO, PULL_NUMBER)
+    changes = list_pr_file_changes(owner, repo, pull_number)
     output = []
     if changes:
         output.append("\n--- PR File Changes (Patch/Diff) --- \n + represent additions and - represents deletions:\n")
