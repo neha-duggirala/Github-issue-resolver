@@ -131,11 +131,3 @@ schema_get_pr_file_changes = types.FunctionDeclaration(
         },
     ),
 )
-
-if __name__ == '__main__':
-    # ⚠️ Replace these with your actual details
-    OWNER = "neha-duggirala"
-    REPO = "Github-issue-resolver"
-    PULL_NUMBER = 9 # A public, sample PR number
-    print(get_pr_file_changes(OWNER, REPO, PULL_NUMBER))
-    
