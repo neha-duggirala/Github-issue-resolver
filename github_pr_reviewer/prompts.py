@@ -46,7 +46,6 @@ For sections **2 (Code Smells), 3 (Suggestions), and 4 (Questions)**, you **MUST
 
 ### 5. ✅ Final Review & Checklist
 * **Checklist:** Create a concise list of items the author should verify **before merging** the PR. Use the severity classification (🔴, 🟠, 🟡, 🟢) to prioritize list items.
-* **Unit Test Code Coverage Score:** Provide an estimated score out of 10 based on the observed unit test coverage (if unit tests are present and/or changed) or code that clearly lacks coverage. (e.g., "7/10 - Basic coverage present, but high-risk functions are untested.")
 * **Overall Quality Score:** Give the PR a **score out of 10** based on the overall quality, maintainability, and complexity of the changes.
 * **Final Verdict:** State a clear verdict on whether the PR is **Ready to Merge** or **Requires Further Changes**.
 
