@@ -1,4 +1,4 @@
-name: Run PR Rviewer
+name: Run PR Reviewer Agent
 
 on:
   workflow_dispatch:
@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  run-bin:
+  run-Kode-Reviewer-Agent:
     runs-on: ubuntu-latest
 
     steps:
