@@ -20,6 +20,26 @@ V1 suggestions
 7. Add logs
 8. github apps
 
+V1 review:(meher and deepak)
+1. instead of color codes mention the categories with colors✅
+2. Add formating example in system prompt.✅
+3. store each files summary of the repo first. Then check if the pr change is breaking any functionality
+ (do it with doc strings or deepwiki or some new agent) (send the file summary & context of the files changed)
+{
+    "main.py" : "sumary main", - change
+    "main2.py" : "summary main", - using main.py functions (imports functions from main.py)
+    "readme.md" : "summarty ... "
+}
+Use RAG for storing Vector embeddings
+4.sensitive/pii info in the commits (new agent)
+5. multi agent
+6. existing system problems ki 2 paras (detailed prompts) each action ki expand prompt
+- main prompt okkati (it will direct to the sub prompts) and then children prompt
+- all the subprompts are stored in md files. Agent orchestration. build a prompt agent that seletcs the correct md propmpt file
+7. what suggestions - optimise code? how?
+8. CI logs (later)
+9. vLLM for inference
+
 
 
 V1:
