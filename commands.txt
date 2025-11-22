@@ -1,0 +1,9 @@
+To start env:
+.venv\Scripts\Activate.ps1
+
+        .venv\Scripts\activate.bat
+
+
+To init uv
+
+uv init
